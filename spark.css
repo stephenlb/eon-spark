@@ -30,12 +30,16 @@ body, div {
 line.cotton {
     stroke: #f56476;
     stroke-width: 1.2%;
-    stroke-dasharray: 2 2 400;
-    animation: traffic 3.1s linear 0s infinite;
+    stroke-dasharray: 9 2 400;
+    animation: traffic 5.0s linear 0s infinite;
 }
 
-@keyframes traffic   {
-      0% {}
-     50% { stroke:#119da4; transform: translate(3px,6px) scale(1.0,1.0) rotateY(0deg) rotateZ(0deg); }
+@keyframes traffic {
+    0% {}
+    10% {
+        stroke: #119da4;
+        transform: translate(3px,6px) scale(1.0,0.9)
+                   rotateY(6deg) rotateZ(1deg);
+    }
     100% {}
 }
