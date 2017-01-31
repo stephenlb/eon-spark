@@ -12,47 +12,30 @@ body, div {
 ::-webkit-scrollbar { display: none }
 ::scrollbar { display: none }
 
+.clear    { clear: both }
+.relative { position: relative }
+
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-/* WORLD TRAFFIC */
+/* TRAFFIC SPARK */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-#world-traffic {
-    background: rgba(124,197,126,0.1);
+#traffic {
+    background: #f5e2c8;
     width: 100%;
     height: 270px;
 }
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-/* SVG GRAPH DESIGN */
+/* SPARK LINES */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-line.world {
-    stroke: rgba(253,4,154,1.0);
-    stroke-width: 0.9%;
-}
-line.publish {
-    stroke: rgba(37,171,236,1.0);
-    stroke-width: 0.8%;
+line.cotton {
+    stroke: #f56476;
+    stroke-width: 1.2%;
     stroke-dasharray: 2 2 400;
-}
-line.ghost {
-    display: none;
-    /*
-    stroke: rgba(255,255,255,0.06);
-    stroke-width: 0.8%;
-    stroke-dasharray: 2 2 400;
-    */
-}
-line.publish-rafta {
-    stroke: rgba(255,255,9,1.0);
-    stroke-width: 0.8%;
-    stroke-dasharray: 2 2 400;
-}
-line.header-spark {
-    stroke: rgba(255,255,255,0.5);
-    stroke-width: 3%;
+    animation: traffic 3.1s linear 0s infinite;
 }
 
-/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-/* UTILITIES */
-/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
-.clear    { clear: both }
-.relative { position: relative }
+@keyframes traffic   {
+      0% {}
+     50% { stroke:#119da4; transform: translate(3px,6px) scale(1.0,1.0) rotateY(0deg) rotateZ(0deg); }
+    100% {}
+}

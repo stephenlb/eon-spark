@@ -1,20 +1,21 @@
 (function(){
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-// Reload Page Interval
+// Traffic Graph
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-var worldgraph = grapher({
-    svg      : 'world-traffic'
+const traffic = spark({
+    svg      : 'traffic'
 ,   margin   : 0.00001
-,   easing   : 'linear'
-,   duration : 120
+,   duration : 10
 ,   rmargin  : 3
 });
 
-// World Graph
-worldgraph.append({
-    classname : 'world'
-,   value     : Math.pow( traffic.totalsec.result, 2 )
-});
+// Traffic Graph
+setInterval( () => {
+    traffic.append({
+        classname : 'cotton'
+    ,   value     : Math.random() * 1000 + 300
+    });
+}, 100 );
 
 })();
