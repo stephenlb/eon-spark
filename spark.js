@@ -1,9 +1,14 @@
-(function(){
+(()=>{
+
+'use strict';
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // SVG GRAPHER
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const spark = window.spark = function(setup) {
+const spark = window.spark = setup => {
+// TODO auto-append mode via pubnub (Channel/Subkey/AuthKey)
+// TODO transform for pubnub sub
+// TODO frequency snap (auto-align)
     let canvas    = document.getElementById(setup.svg||setup.id)||setup.elm
     ,   container = setup.todo          || null // TODO TODO TODO
     ,   margin    = setup.margin        || 0.00000001
@@ -72,12 +77,38 @@ const spark = window.spark = function(setup) {
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // Append Data to the Graph
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    function append(settings) {
-        // Don't render on Non Visible Tab
-        if (!vis()) return false;
+    function append(vector) {
+        draw(vector);
+    }
 
-        let value     = settings.value
-        ,   cname     = settings.classname || classname
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Distributes Lines Evenly (best when focus restored after blurred)
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    vis( event => { vis() && redraw() } );
+    function redraw() {
+        console.log('redrawing');
+
+        // TODO draw all buffered vectors
+        let lines = group.getElementsByTagName("line")
+        ,   line  = 0
+        ,   lineo = 0
+        ,   size  = (width / lines.length)
+        ,   delta = width * ((((+new Date - started) / 1000) / duration) + 1);
+
+        // Reposition each line
+        for (;line < lines.length ; line++) {
+            lineo = lines.length - line;
+            lines[line].setAttribute( 'x1', delta - lineo * size );
+            lines[line].setAttribute( 'x2', delta - lineo * size );
+        }
+    }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Adds Line to Beginning
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    function draw(vector) {
+        let value     = vector.value
+        ,   cname     = vector.classname || classname
         ,   timedelta = (((+new Date - started) / 1000) / duration) + 1
         ,   line      = document.createElementNS(
             'http://www.w3.org/2000/svg', 'line'
@@ -88,7 +119,7 @@ const spark = window.spark = function(setup) {
         height = canvas.offsetHeight||canvas.parentNode.offsetHeight;
 
         // Rescale if we Hit Ceiling
-        rescale(settings.ceiling || value);
+        rescale(vector.ceiling || value);
 
         // Save Basic Information
         line.setAttribute( 'value', value );
@@ -104,7 +135,7 @@ const spark = window.spark = function(setup) {
         group.appendChild(line);
 
         // Start End of Life Clock
-        setTimeout( function() {
+        setTimeout( () => {
             group.removeChild(line);
             if (value >= ceiling) repeak();
         }, duration * 1100 );
@@ -123,7 +154,7 @@ const spark = window.spark = function(setup) {
         ceiling = 1;
 
         // Adjust All Graph Lines for New Scale
-        for (;line < lines.length;line++) {
+        for (;line < lines.length ; line++) {
             value = +lines[line].getAttribute('value');
             if (value > peak) peak = value;
         }
@@ -157,7 +188,7 @@ const spark = window.spark = function(setup) {
     setInterval( chart_motion, duration * 500 );
 
     // Provide Manipulation Interface
-    let self = function(){ return self };
+    let self = () => { return self };
 
     // Public Methods
     self.append = append;
@@ -169,14 +200,14 @@ const spark = window.spark = function(setup) {
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Visibility
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const vis = (function(){
+const vis = (()=>{
     let stateKey
     ,   eventKey
     ,   keys = {
-            hidden: "visibilitychange"
-        ,   webkitHidden: "webkitvisibilitychange"
-        ,   mozHidden: "mozvisibilitychange"
-        ,   msHidden: "msvisibilitychange"
+            hidden       : "visibilitychange"
+        ,   webkitHidden : "webkitvisibilitychange"
+        ,   mozHidden    : "mozvisibilitychange"
+        ,   msHidden     : "msvisibilitychange"
     };
 
     for (stateKey in keys) {
@@ -186,7 +217,7 @@ const vis = (function(){
         }
     }
 
-    return function(c) {
+    return c => {
         if (c) document.addEventListener( eventKey, c );
         return !document[stateKey];
     }
@@ -195,7 +226,7 @@ const vis = (function(){
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Request URL
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const requester = function(setup) {
+const requester = setup => {
 
     let xhr      = new XMLHttpRequest()
     ,   finished = false
@@ -216,7 +247,7 @@ const requester = function(setup) {
     }
 
     // When a Request has a Payload
-    xhr.onload = function() {
+    xhr.onload = () => {
         if (finished) return;
         finish();
         let result;
@@ -230,21 +261,21 @@ const requester = function(setup) {
     };
 
     // When a Request has Failed
-    xhr.onabort = xhr.ontimeout = xhr.onerror = function() {
+    xhr.onabort = xhr.ontimeout = xhr.onerror = () => {
         if (finished) return;
         finish();
         fail(xhr);
     };
 
     // Timeout and Aboart for Slow Requests
-    xhr.timer = setTimeout( function(){
+    xhr.timer = setTimeout( () => {
         if (finished) return;
         abort();
         fail(xhr);
     }, timeout );
 
     // Return Requester Object
-    return function(setup) {
+    return setup => {
         let url     = setup.url     || 'https://ps.pubnub.com/time/0'
         ,   headers = setup.headers || {}
         ,   method  = setup.method  || 'GET'
@@ -282,7 +313,7 @@ const requester = function(setup) {
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Subscribe
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const subscribe = function(setup) {
+const subscribe = setup => {
     let pubkey    = setup.pubkey    || 'demo'
     ,   subkey    = setup.subkey    || 'demo'
     ,   channel   = setup.channel   || 'a'
@@ -299,7 +330,7 @@ const subscribe = function(setup) {
     let request = requester({
         timeout : timeout,
         success : next,
-        fail    : function(){ next() }
+        fail    : () => { next() }
     });
 
     // Subscribe Loop
@@ -317,7 +348,7 @@ const subscribe = function(setup) {
             '/0/',            timetoken
         ].join('');
 
-        setTimeout( function() {
+        setTimeout( () => {
             windowing = windy;
             request({ url : url });
         }, windowing );

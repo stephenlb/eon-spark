@@ -1,4 +1,4 @@
-(function(){
+(()=>{
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Traffic Graph
@@ -14,7 +14,7 @@ const traffic = spark({
 setInterval( () => {
     traffic.append({
         classname : 'cotton'
-    ,   value     : Math.random() * 1000 + 300
+    ,   value     : Math.random() * 1000 + 2000
     });
 }, 200 );
 
