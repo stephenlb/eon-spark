@@ -209,7 +209,7 @@ const spark = window.spark = setup => {
     setInterval( chart_motion, duration * 500 );
 
     // Provide Manipulation Interface
-    let self = () => { return self };
+    let self = () => self;
 
     // Public Methods
     self.append = append;
@@ -351,7 +351,7 @@ const subscribe = setup => {
     let request = requester({
         timeout : timeout,
         success : next,
-        fail    : () => { next() }
+        fail    : () => next()
     });
 
     // Subscribe Loop

@@ -25,23 +25,41 @@ body, div {
 }
 
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* OTHER SPARKS */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+#one, #two, #three {
+    background: #2f243a;
+    width: 100%;
+    height: 100px;
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 /* SPARK LINES */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 line.cotton {
     stroke: #f56476;
     stroke-width: 1.0%;
     stroke-dasharray: 9 2 400;
-    animation: traffic 3.0s linear 0s infinite;
+    animation: traffic 8.0s linear 0s infinite;
+}
+
+line.fancy {
+    stroke: #f56476;
+    stroke-width: 0.6%;
+    stroke-dasharray: 2 2 400;
+    animation: highway 10.5s linear 0s infinite;
 }
 
 @keyframes traffic {
-    0% {}
-    70% {
-        transform: translate(0px,10px) scale(1.0,1.0)
-                   rotateY(0deg) rotateZ(0deg);
-    }
-    90% {
-        stroke: #119da4;
-    }
-    100% {}
+    0%   { }
+    70%  { transform: translateY(40px) }
+    90%  { stroke: #119da4 }
+    100% { }
+}
+
+@keyframes highway {
+    0%   { }
+    70%  { transform: translateY(40px) rotateZ(1deg) }
+    90%  { stroke: #f5e2c8 }
+    100% { }
 }
