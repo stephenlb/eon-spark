@@ -16,6 +16,8 @@ the way you would imagine.
 
  - TODO - website w/ signup form
  - TODO - Spark Builder (themes, data source/test data, etc.)
+ - TODO - Web Dashboard Demo
+ - TODO - BLOCKS for Stream Processing
  - TODO - iOS 
  - TODO - Android
  - TODO - Angular
