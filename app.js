@@ -14,7 +14,7 @@ const traffic = spark({
 const sparks = [
     spark({ svg : 'one',   duration : 20 })
 ,   spark({ svg : 'two',   duration : 20 })
-,   spark({ svg : 'three', duration : 20 })
+//,   spark({ svg : 'three', duration : 20 })
 ];
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
