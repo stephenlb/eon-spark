@@ -1,0 +1,32 @@
+{
+  "name": "eon-spark",
+  "version": "1.0.0",
+  "description": "EON Spark is the visual representation of live streaming data, the way you would imagine.",
+  "main": "eon-spark.js",
+  "scripts": {
+    "test": "eon-spark-test.js"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stephenlb/eon-spark.git#master"
+  },
+  "keywords": [
+    "ios",
+    "android",
+    "angular",
+    "react",
+    "graph",
+    "spark",
+    "chart",
+    "stream",
+    "json",
+    "messaging"
+  ],
+  "author": "Stephen Blum",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stephenlb/eon-chart/issues"
+  },
+  "homepage": "http://stephenlb.github.io/eon-spark"
+}
