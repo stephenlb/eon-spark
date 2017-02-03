@@ -11,8 +11,11 @@ It's fast, simple, and open source.
 You imagine what live streaming data looks like.
 Charting and graphing for live streaming data.
 iOS, Android and web browsers.
+This is the visual representation of live streaming data,
+the way you would imagine.
 
  - TODO - website w/ signup form
+ - TODO - Spark Builder (themes, data source/test data, etc.)
  - TODO - iOS 
  - TODO - Android
  - TODO - Angular
