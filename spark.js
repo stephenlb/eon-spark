@@ -31,6 +31,29 @@ const spark = window.spark = setup => {
     // TODO container autocreate SVG Canvas Element.
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Iterate Lines
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    function iterlines(cb) {
+        // Get All Lines on the SVG Canvas for Adjustment
+        const lines  = iterlines.lines();
+        const length = lines.length;
+        let   line   = 0;
+
+        // Adjust All Graph Lines for New Scale
+        for (;line < length ; line++) cb( lines[line], line, length, lines );
+    }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Lines List
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    iterlines.lines = () => {
+        return Array.from(group.getElementsByTagName("line"));
+    };
+    iterlines.total = () => {
+        return iterlines.lines().length;
+    };
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // Rescale Graph to fit New Ceiling
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     function rescale(value) {
@@ -41,14 +64,10 @@ const spark = window.spark = setup => {
         ceiling = value;
         scale   = height / value;
 
-        // Get All Lines on the SVG Canvas for Adjustment
-        let lines = group.getElementsByTagName("line")
-        ,   line  = 0;
-
         // Adjust All Graph Lines for New Scale
-        for (;line < lines.length;line++) {
-            adjust( lines[line], +lines[line].getAttribute('value') );
-        }
+        iterlines(( line, number, length ) => {
+            adjust( line, +line.getAttribute('value') );
+        })
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -82,25 +101,29 @@ const spark = window.spark = setup => {
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    // Distributes Lines Evenly (best when focus restored after blurred)
+    // Detect the need to REDRAW
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     vis( event => { vis() && redraw() } );
-    function redraw() {
-        console.log('redrawing');
 
-        // TODO draw all buffered vectors
-        let lines = group.getElementsByTagName("line")
-        ,   line  = 0
-        ,   lineo = 0
-        ,   size  = (width / lines.length)
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Distributes Lines Evenly (best when focus restored after blurred)
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    function redraw() {
+        let lineo = 0
+        ,   lines = iterlines.lines()
+        ,   dist  = (lines[0]||0) - (lines[1]||0)
         ,   delta = width * ((((+new Date - started) / 1000) / duration) + 1);
 
+        // Determine Line Distribution
+        dist = +(lines[1] ? lines[1].getAttribute('x1') : 0 ) -
+               +(lines[0] ? lines[0].getAttribute('x1') : 0 );
+
         // Reposition each line
-        for (;line < lines.length ; line++) {
-            lineo = lines.length - line;
-            lines[line].setAttribute( 'x1', delta - lineo * size );
-            lines[line].setAttribute( 'x2', delta - lineo * size );
-        }
+        iterlines(( line, number, length ) => {
+            lineo = length - number;
+            line.setAttribute( 'x1', delta - lineo * dist );
+            line.setAttribute( 'x2', delta - lineo * dist );
+        } );
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -138,26 +161,24 @@ const spark = window.spark = setup => {
         setTimeout( () => {
             group.removeChild(line);
             if (value >= ceiling) repeak();
-        }, duration * 1100 );
+        }, duration * 3000 );
     }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // Recalculate Ceiling So When Peak Disappears on Graph
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     function repeak() {
-        let lines = group.getElementsByTagName("line")
-        ,   line  = 0
-        ,   value = 0
+        let value = 0
         ,   peak  = 0;
 
         // Reset Ceiling
         ceiling = 1;
 
         // Adjust All Graph Lines for New Scale
-        for (;line < lines.length ; line++) {
-            value = +lines[line].getAttribute('value');
+        iterlines(( line, number, length ) => {
+            value = +line.getAttribute('value');
             if (value > peak) peak = value;
-        }
+        } );
 
         // Rescale Based on New Peak
         rescale(peak);
