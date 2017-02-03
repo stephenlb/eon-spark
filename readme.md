@@ -4,7 +4,7 @@ Developers create engaging, beautiful
 live data visuals that helps you stand out.
 It's fast, simple, and open source.
 
-### Developers create live data as **Lovely Visuals**.
+### Developers create **lovely visuals** from live data.
 
 ![EON Spark Chart and Graph](http://i.imgur.com/aFysWAy.gif)
 
