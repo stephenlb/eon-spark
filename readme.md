@@ -1,9 +1,10 @@
 # EON Spark
 
-Developers create engaging, beautiful content that helps you stand out.
+Developers create engaging, beautiful
+live data visuals that helps you stand out.
 It's fast, simple, and open source.
 
-### Developers show data as **Creative Visuals**.
+### Developers create live data as **Lovely Visuals**.
 
 ![EON Spark Chart and Graph](http://i.imgur.com/aFysWAy.gif)
 
