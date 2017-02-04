@@ -14,6 +14,13 @@ iOS, Android and web browsers.
 This is the visual representation of live streaming data,
 the way you would imagine.
 
+### EON Spark Graphing
+
+EON Spark is lightweight, and has been coded ground-up.
+No dependencies are required.
+This means streamlined performance dedicated to drawing
+streaming data visuals.
+
  - TODO - website w/ signup form
  - TODO - Spark Builder (themes, data source/test data, etc.)
  - TODO - Web Dashboard Demo
@@ -24,3 +31,4 @@ the way you would imagine.
  - TODO - Angular2
  - TODO - React
  - TODO - Polymer
+ - TODO - http://buildwithreact.com/tutorial/events tutorial style
