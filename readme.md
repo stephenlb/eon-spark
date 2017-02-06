@@ -20,15 +20,21 @@ EON Spark is lightweight, and has been coded ground-up.
 No dependencies are required.
 This means streamlined performance dedicated to drawing
 streaming data visuals.
+EON Spark library was purpose built for mobile and web displays.
+This graphing library was built internally at
+[PubNub](https://www.pubnub.com/) and has been in use since 2014.
 
- - TODO - website w/ signup form
- - TODO - Spark Builder (themes, data source/test data, etc.)
- - TODO - Web Dashboard Demo
- - TODO - BLOCKS for Stream Processing
- - TODO - iOS 
- - TODO - Android
- - TODO - Angular
- - TODO - Angular2
- - TODO - React
- - TODO - Polymer
- - TODO - http://buildwithreact.com/tutorial/events tutorial style
+## EON Spark Roadmap
+
+ - Website w/ signup form
+ - Spark Builder/Gallery (themes, data source/test data, etc.)
+ - Web Dashboard Demo
+ - Documentation of each parameter
+ - BLOCKS for Stream Processing
+ - iOS Cocoa Pod
+ - Android Module
+ - Angular Module
+ - Angular2 Module
+ - React Module
+ - Polymer Component
+ - http://buildwithreact.com/tutorial/events tutorial style
