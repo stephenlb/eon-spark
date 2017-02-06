@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EON Spark Hello World Data Visualization</title>
+</head>
+<body>
+
+<!-- Graph DOM Element -->
+<svg id='sparkline'></svg>
+
+<!-- How should the line look? -->
+<style>
+    #sparkline {
+        background: #f5e2c8;
+        displays: inline-block;
+        width: 500px;
+        height: 100px;
+    }
+    line.sparkline {
+        stroke: #f56476;
+        stroke-width: 3.0%;
+        stroke-dasharray: 2 2 400;
+    }
+</style>
+
+<!-- JavaScript Setup -->
+<script src="../eon-spark.js"></script>
+<script>
+    const graph = eon.spark({ duration: 10, svg : 'sparkline' });
+    setInterval( () => {
+        graph.append({
+            classname : 'sparkline'
+        ,   value     : Math.random() * 300 + 2000
+        });
+    }, 500 );
+</script>
+
+</body>
+</html>

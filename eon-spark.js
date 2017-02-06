@@ -7,26 +7,23 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 const spark = setup => {
     let canvas    = document.getElementById(setup.svg||setup.id)||setup.elm
-    ,   container = setup.todo          || null // TODO TODO TODO
-    ,   margin    = setup.margin        || 0.00000001
-    ,   rmargin   = setup.rmargin       || 15
+    ,   margin    = setup.margin        || 0.00000001 // pixels
+    ,   rmargin   = setup.rmargin       || 15         // pixels
     ,   center    = setup.center        || false
     ,   easing    = setup.easing        || 'linear'
     ,   classname = setup.classname     || 'grapher'
-    ,   duration  = setup.duration      || 60
-    ,   width     = canvas.offsetWidth  || canvas.parentNode.offsetWidth
-    ,   height    = canvas.offsetHeight || canvas.parentNode.offsetHeight
+    ,   duration  = setup.duration      || 60          // seconds
+    ,   title     = setup.title         || ''          // string  TODO
+    ,   snap      = setup.snap          || 10          // pixels  TODO
+    ,   freqency  = setup.freqency      || 1           // seconds TODO
+    ,   width     = canvas.getBoundingClientRect().width
+    ,   height    = canvas.getBoundingClientRect().height
     ,   started   = +new Date()
     ,   ceiling   = 1
     ,   scale     = 1
     ,   group     = document.createElementNS(
         'http://www.w3.org/2000/svg', 'g'
     );
-
-    // So you can have Number/Value shown in Text
-    // TODO container autocreate SVG Canvas Element.
-    // TODO container autocreate SVG Canvas Element.
-    // TODO container autocreate SVG Canvas Element.
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
     // Iterate Lines
@@ -136,8 +133,8 @@ const spark = setup => {
         );
 
         // Recapture Width and Height (in case we resize)
-        width  = (canvas.offsetWidth||canvas.parentNode.offsetWidth)+rmargin;
-        height = canvas.offsetHeight||canvas.parentNode.offsetHeight;
+        width  = canvas.getBoundingClientRect().width + rmargin;
+        height = canvas.getBoundingClientRect().height;
 
         // Rescale if we Hit Ceiling
         rescale(vector.ceiling || value);

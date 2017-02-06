@@ -24,6 +24,52 @@ EON Spark library was purpose built for mobile and web displays.
 This graphing library was built internally at
 [PubNub](https://www.pubnub.com/) and has been in use since 2014.
 
+### Getting Started: EON Spark Data Visualizations
+
+How to draw lines on a spark chart with a quick tutorial.
+Start with defining your HTML DOM element `<svg>`.
+
+```html
+<!-- Graph DOM Element -->
+<svg id='sparkline'></svg>
+```
+
+How should your sparkline look?
+It should be pretty!
+Sparkline basic CSS provided.
+
+```html
+<!-- How should the line look? -->
+<style>
+    #sparkline {
+        background: #f5e2c8;
+        displays: inline-block;
+        width: 500px;
+        height: 100px;
+    }
+    line.sparkline {
+        stroke: #f56476;
+        stroke-width: 3.0%;
+        stroke-dasharray: 2 2 400;
+    }
+</style>
+```
+
+Adding a line to the chart by using `.append` method.
+
+```html
+<!-- JavaScript Setup -->
+<script>
+    const graph = eon.spark({ duration: 10, svg : 'sparkline' });
+    setInterval( () => {
+        graph.append({
+            classname : 'sparkline'
+        ,   value     : Math.random() * 300 + 2000
+        });
+    }, 500 );
+</script>
+```
+
 ## EON Spark Roadmap
 
  - Website w/ signup form
