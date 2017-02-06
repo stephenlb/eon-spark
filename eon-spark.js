@@ -7,11 +7,6 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 window.eon  = window.eon || {};
 const spark = window.eon.spark = setup => {
-// TODO labels for graphs (name/value)
-// TODO auto-append mode via pubnub (Channel/Subkey/AuthKey)
-// TODO Snap to position (so even bars no matter what)
-// TODO transform for pubnub sub
-// TODO frequency snap (auto-align)
     let canvas    = document.getElementById(setup.svg||setup.id)||setup.elm
     ,   container = setup.todo          || null // TODO TODO TODO
     ,   margin    = setup.margin        || 0.00000001
