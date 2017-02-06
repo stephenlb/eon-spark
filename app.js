@@ -3,7 +3,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Traffic Graph
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const traffic = spark({
+const traffic = eon.spark({
     svg      : 'traffic'
 ,   duration : 20
 });
@@ -12,9 +12,9 @@ const traffic = spark({
 // Other Sparks - Multi-graph Support
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 const sparks = [
-    spark({ svg : 'one',   duration : 20 })
-,   spark({ svg : 'two',   duration : 20 })
-//,   spark({ svg : 'three', duration : 20 })
+    eon.spark({ svg : 'one',   duration : 20 })
+,   eon.spark({ svg : 'two',   duration : 20 })
+//,   eon.spark({ svg : 'three', duration : 20 })
 ];
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

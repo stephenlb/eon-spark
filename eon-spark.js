@@ -5,8 +5,11 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // SVG GRAPHER
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-const spark = window.spark = setup => {
+window.eon  = window.eon || {};
+const spark = window.eon.spark = setup => {
+// TODO labels for graphs (name/value)
 // TODO auto-append mode via pubnub (Channel/Subkey/AuthKey)
+// TODO Snap to position (so even bars no matter what)
 // TODO transform for pubnub sub
 // TODO frequency snap (auto-align)
     let canvas    = document.getElementById(setup.svg||setup.id)||setup.elm
@@ -26,6 +29,7 @@ const spark = window.spark = setup => {
         'http://www.w3.org/2000/svg', 'g'
     );
 
+    // So you can have Number/Value shown in Text
     // TODO container autocreate SVG Canvas Element.
     // TODO container autocreate SVG Canvas Element.
     // TODO container autocreate SVG Canvas Element.
