@@ -55,12 +55,21 @@ Sparkline basic CSS provided.
 </style>
 ```
 
-Adding a line to the chart by using `.append` method.
+Initialize EON Spark Graph
 
 ```html
-<!-- JavaScript Setup -->
+<script src="../eon-spark.js"></script>
 <script>
+    // Create sparkline
     const graph = eon.spark({ duration: 10, svg : 'sparkline' });
+</script>
+```
+
+Adding a line to the chart by using `.append()` method.
+
+```html
+<script>
+    // Draw line two times per second with random value.
     setInterval( () => {
         graph.append({
             classname : 'sparkline'
