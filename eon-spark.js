@@ -5,8 +5,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // SVG GRAPHER
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-window.eon  = window.eon || {};
-const spark = window.eon.spark = setup => {
+const spark = setup => {
     let canvas    = document.getElementById(setup.svg||setup.id)||setup.elm
     ,   container = setup.todo          || null // TODO TODO TODO
     ,   margin    = setup.margin        || 0.00000001
@@ -216,6 +215,13 @@ const spark = window.eon.spark = setup => {
     // Return API
     return self;
 };
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// API ACCESS
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+if (window) window.eon                           = window.eon || {};
+if (window) window.eon.spark                     = spark;
+if (typeof module != "undefined") module.exports = spark;
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Visibility
