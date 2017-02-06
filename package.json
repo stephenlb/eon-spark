@@ -1,6 +1,6 @@
 {
   "name": "eon-spark",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Developers create engaging, beautiful live data visuals that helps you stand out. It's fast, simple, and open source. EON Spark is the visual representation of live streaming data, the way you would imagine.",
   "main": "eon-spark.js",
   "scripts": {
