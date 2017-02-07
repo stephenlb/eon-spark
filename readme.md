@@ -31,7 +31,7 @@ Start with defining your HTML DOM element `<svg>`.
 
 ```html
 <!-- Graph DOM Element -->
-<svg id='sparkline'></svg>
+<svg id='basic-sparkline'></svg>
 ```
 
 How should your sparkline look?
@@ -41,13 +41,12 @@ Sparkline basic CSS provided.
 ```html
 <!-- How should the line look? -->
 <style>
-    #sparkline {
+    #basic-sparkline {
         background: #f5e2c8;
-        displays: inline-block;
         width: 500px;
         height: 100px;
     }
-    line.sparkline {
+    line.basic {
         stroke: #f56476;
         stroke-width: 3.0%;
         stroke-dasharray: 2 2 400;
@@ -55,13 +54,13 @@ Sparkline basic CSS provided.
 </style>
 ```
 
-Initialize EON Spark Graph
+Initialize EON Spark graph and create painting area.
 
 ```html
 <script src="../eon-spark.js"></script>
 <script>
-    // Create sparkline
-    const graph = eon.spark({ duration: 10, svg : 'sparkline' });
+    // Generate sparkline graph
+    const sparkline = eon.spark({ duration: 10, svg : 'basic-sparkline' });
 </script>
 ```
 
@@ -72,7 +71,7 @@ Adding a line to the chart by using `.append()` method.
     // Draw line two times per second with random value.
     setInterval( () => {
         graph.append({
-            classname : 'sparkline'
+            classname : 'basic'
         ,   value     : Math.random() * 300 + 2000
         });
     }, 500 );
