@@ -1,0 +1,55 @@
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* COLOR SCHEME */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* #f5e2c8 - cream     */
+/* #f56476 - taffy     */
+/* #2f243a - plumb     */
+/* #119da4 - caribbean */
+/* #0e7c7b - twilight  */
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* BASICS */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+body { background: #353535 }
+body, div, svg {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    cursor: default;
+}
+
+::-webkit-scrollbar { display: none }
+::scrollbar { display: none }
+
+.clear    { clear: both }
+.relative { position: relative }
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* TRAFFIC SPARK GRAPH */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+#hero-container {
+    overflow: hidden;
+    height: 500px;
+}
+#hero {
+    background: #f5e2c8;
+    width: 110%;
+    height: 900px;
+    transform: translate(-60px,-180px) rotateZ(-15deg);
+}
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* HERO SPARK LINES */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+line.hero {
+    stroke: rgba(245,100,118,1.0);
+    stroke-width: 3.2%;
+    animation: hero 5.0s linear 0s infinite;
+}
+
+@keyframes hero {
+    0%   { }
+    70%  { transform: translate(100px,100px) }
+    90%  { stroke: rgba(17,157,164,1.0) }
+    100% { }
+}

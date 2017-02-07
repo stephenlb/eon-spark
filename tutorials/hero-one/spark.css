@@ -1,8 +1,17 @@
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* COLOR SCHEME */
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
+/* #f5e2c8 - cream     */
+/* #f56476 - taffy     */
+/* #2f243a - plumb     */
+/* #119da4 - caribbean */
+/* #0e7c7b - twilight  */
+
+/* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 /* BASICS */
 /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= */
 body { background: #353535 }
-body, div {
+body, div, svg {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
@@ -49,7 +58,6 @@ body, div {
 line.cotton {
     stroke: #f56476;
     stroke-width: 1.0%;
-    stroke-dasharray: 9 2 100 200;
     animation: traffic 8.0s linear 0s infinite;
 }
 

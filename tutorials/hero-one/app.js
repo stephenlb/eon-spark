@@ -7,7 +7,7 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 const traffic = eon.spark({
     svg      : 'traffic'
-,   center   : true
+//,   center   : true
 ,   duration : 20
 });
 
@@ -15,8 +15,8 @@ const traffic = eon.spark({
 // Other Sparks - Multi-graph Support
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 const sparks = [
-    eon.spark({ svg : 'one',   duration : 20 })
-,   eon.spark({ svg : 'two',   duration : 20 })
+    eon.spark({ svg : 'one', duration : 20 })
+,   eon.spark({ svg : 'two', duration : 20 })
 ];
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -24,11 +24,11 @@ const sparks = [
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 setInterval( () => {
     traffic.append({
-        classname : 'cotton',  value : Math.random() * 300 + 2000
+        classname : 'cotton', value : Math.random() * 100 + 100
     });
 
     sparks.forEach( sp => sp.append({
-        classname : 'fancy',  value : Math.random() * 10 + 20
+        classname : 'fancy', value : Math.random() * 10 + 20
     }) );
 }, 200 );
 
