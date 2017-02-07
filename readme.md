@@ -63,7 +63,7 @@ Initialize EON Spark graph and create painting area.
 <script src="../eon-spark.js"></script>
 <script>
     // Generate sparkline graph
-    const sparkline = eon.spark({ duration: 10, svg : 'basic-sparkline' });
+    const graph = eon.spark({ duration: 10, svg : 'basic-sparkline' });
 </script>
 ```
 
