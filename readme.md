@@ -30,13 +30,16 @@ How to draw lines on a spark chart with a quick tutorial.
 Start with defining your HTML DOM element `<svg>`.
 
 ```html
-<!-- Graph DOM Element -->
+<!-- Sparkline Graph Element -->
 <svg id='basic-sparkline'></svg>
 ```
 
 How should your sparkline look?
 It should be pretty!
-Sparkline basic CSS provided.
+Sparkline `basic` CSS provided.
+You can define `animation` and more!
+Make your sparkline sparkle.
+We'll start simple first.
 
 ```html
 <!-- How should the line look? -->
