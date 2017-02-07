@@ -216,9 +216,11 @@ const spark = setup => {
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // API ACCESS
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-if (window) window.eon                           = window.eon || {};
-if (window) window.eon.spark                     = spark;
 if (typeof module != "undefined") module.exports = spark;
+if (typeof window != "undefined") {
+    window.eon       = window.eon || {};
+    window.eon.spark = spark;
+}
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // Visibility
