@@ -17,7 +17,6 @@ const traffic = eon.spark({
 const sparks = [
     eon.spark({ svg : 'one',   duration : 20 })
 ,   eon.spark({ svg : 'two',   duration : 20 })
-//,   eon.spark({ svg : 'three', duration : 20 })
 ];
 
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -29,7 +28,7 @@ setInterval( () => {
     });
 
     sparks.forEach( sp => sp.append({
-        classname : 'fancy',  value : Math.random() * 10 + 200
+        classname : 'fancy',  value : Math.random() * 10 + 20
     }) );
 }, 200 );
 
