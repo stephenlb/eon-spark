@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EON Spark Hello World Data Visualization</title>
+</head>
+<body>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- Gradient defined inside Graph DOM Element -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<svg id='basic-sparkline'><defs>
+    <linearGradient id='gradient' x1='0' x2='0' y1='0' y2='1'>
+        <stop stop-opacity='0.9' stop-color='#f56476' offset='0'   />
+        <stop stop-opacity='0.5' stop-color='#2f243a' offset='0.3' />
+        <stop stop-opacity='0.0' stop-color='#e3a820' offset='1'   />
+    </linearGradient>
+</defs></svg>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- How should the line look? -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<style>
+    #basic-sparkline {
+        background: #f5e2c8;
+        width: 500px;
+        height: 100px;
+    }
+    line.basic {
+        fill: none;
+        stroke: url(#gradient); /* <------<--< */
+        stroke-width: 3.0%;
+        stroke-dasharray: 2 2 400;
+    }
+</style>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- Render Sparkline Graph via JavaScript -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<script src='../../eon-spark.js'></script>
+<script>
+    const graph = eon.spark({ duration: 10, svg : 'basic-sparkline' });
+    setInterval( () => {
+        graph.append({
+            classname : 'basic'
+        ,   value     : Math.random() * 300 + 2000
+        });
+    }, 250 );
+</script>
+
+</body>
+</html>

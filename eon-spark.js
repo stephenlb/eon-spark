@@ -116,7 +116,7 @@ const spark = setup => {
         // Reposition each line
         iterlines(( line, number, length ) => {
             lineo = length - number;
-            line.setAttribute( 'x1', delta - lineo * dist );
+            line.setAttribute( 'x1', delta - lineo * dist + 0.001 );
             line.setAttribute( 'x2', delta - lineo * dist );
         } );
     }
@@ -143,7 +143,7 @@ const spark = setup => {
         line.setAttribute( 'value', value );
         line.setAttribute( 'class', cname );
         line.setAttribute( 'y2', height - margin );
-        line.setAttribute( 'x1', width * timedelta );
+        line.setAttribute( 'x1', width * timedelta + 0.001 );
         line.setAttribute( 'x2', width * timedelta );
 
         // Prepare and Adjust for Scaled Rendering and Centering
