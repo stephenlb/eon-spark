@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EON Spark Twitter Words Visualization</title>
+</head>
+<body>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- How should the line look? -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<style>
+    html, body {
+        background: #aaa;
+    }
+    div, h1 {
+        font-family: 'Helvetica Neue', Helvetica;
+    }
+    .box {
+        border-radius: 5px;
+    }
+    #twitter {
+        background: #0a0a0f;
+        width: 100%;
+        height: 100px;
+    }
+    line.tweet {
+        stroke: rgba( 25, 125, 220, 0.4 );
+        stroke-width: 0.5%;
+        stroke-linecap: round;
+        animation: tweet 6.0s linear 0s infinite;
+    }
+    #tweet {
+        width: 100%;
+        height: 60px;
+        background: #0a0a0f;
+        color: rgba( 255, 255, 255, 0.3 );
+        text-align: center;
+        line-height: 60px;
+        font-size: 10px;
+        overflow: hidden;
+    }
+    @keyframes tweet {
+        0%   { }
+        50%  { stroke: rgba( 17, 157, 164, 0.8 ) }
+        100% { }
+    }
+</style>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- Tweets -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<h1>Words per Tweet</h1>
+<svg id='twitter' class='box'></svg>
+<div id="tweet" class='box'>tweet text here</div>
+
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<!-- Render Sparkline Graph via JavaScript -->
+<!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+<script src='../../eon-spark.js'></script>
+<script>(()=>{
+    'use strict';
+
+    const tweet = document.getElementById('tweet');
+    const graph = eon.spark({
+        duration    : 10
+    ,   svg         : 'twitter'
+    ,   subkey      : 'sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe'
+    ,   channel     : 'pubnub-twitter'
+    ,   streamspeed : 50
+    ,   receiver    : m => tweet.innerHTML = m.text
+    ,   transform   : m => ({
+            classname : 'tweet'
+            ,   value : m.text.split(/\s/).length
+        })
+    });
+
+})();</script>
+
+</body>
+</html>

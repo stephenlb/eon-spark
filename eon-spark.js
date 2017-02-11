@@ -16,6 +16,13 @@ const spark = setup => {
     ,   title     = setup.title         || ''          // string  TODO
     ,   snap      = setup.snap          || 10          // pixels  TODO
     ,   freqency  = setup.freqency      || 1           // seconds TODO
+    ,   subkey    = setup.subkey        || ''          // Subscribe Key
+    ,   channel   = setup.channel       || ''          // Channel Name
+    ,   transform = setup.transform     || (m=>m)      // Function Transform
+    ,   receiver  = setup.receiver      || (m=>m)      // Function Receiver
+    ,   streamspd = setup.streamspeed   || 100         // milliseconds
+    ,   streamlim = setup.streamlimit   || 100         // message queue limit
+    ,   streamary = []                                 // message queue
     ,   width     = canvas.getBoundingClientRect().width
     ,   height    = canvas.getBoundingClientRect().height
     ,   started   = +new Date()
@@ -209,6 +216,44 @@ const spark = setup => {
     // Public Methods
     self.append = append;
 
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Stream Receiver
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    function stream_receiver(payload) {
+        payload.m.forEach( ( msg, num ) => { 
+            streamary.push(msg);
+            if (streamary.length > streamlim ) streamary.shift();
+        } );
+    }
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Stream Queue Processor
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    setInterval( () => {
+        let msg = streamary.shift();
+        if (!msg) return;
+
+        let point     = transform(msg.d) || {}
+        ,   classname = point.classname
+        ,   value     = +point.value;
+
+        if (classname && value) self.append({
+            classname : classname
+        ,   value     : value
+        });
+
+        receiver(msg.d);
+    }, streamspd );
+
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    // Streams Data Socket
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+    if (subkey && channel) self.stop = subscribe({
+        subkey  : subkey
+    ,   channel : channel
+    ,   message : stream_receiver
+    }).unsubscribe;
+
     // Return API
     return self;
 };
@@ -344,7 +389,7 @@ const subscribe = setup => {
     ,   channel   = setup.channel   || 'a'
     ,   timeout   = setup.timeout   || 5000
     ,   timetoken = setup.timetoken || '0'
-    ,   message   = setup.message   || function(){}
+    ,   message   = setup.message   || (()=>{})
     ,   windy     = setup.windowing || 1000
     ,   windowing = 10
     ,   stop      = false
