@@ -14,8 +14,8 @@ const spark = setup => {
     ,   classname = setup.classname     || 'grapher'
     ,   duration  = setup.duration      || 60          // seconds
     ,   title     = setup.title         || ''          // string  TODO
-    ,   snap      = setup.snap          || 10          // pixels  TODO
-    ,   freqency  = setup.freqency      || 1           // seconds TODO
+    ,   snap      = setup.snap          || 0           // pixels  TODO
+    ,   freqency  = setup.freqency      || 1000        // milliseconds TODO
     ,   subkey    = setup.subkey        || ''          // Subscribe Key
     ,   channel   = setup.channel       || ''          // Channel Name
     ,   transform = setup.transform     || (m=>m)      // Function Transform
@@ -146,12 +146,20 @@ const spark = setup => {
         // Rescale if we Hit Ceiling
         rescale(vector.ceiling || value);
 
+        // Calculate Snap-to-placement Offset
+        let lastline = iterlines.lines().slice(-1)[0]
+        ,   xvalue   = width * timedelta
+        ,   xlast    = lastline ? +lastline.getAttribute('x1') : 0;
+
+        // Allow Snap
+        if (xvalue - xlast < snap) xvalue = xlast + snap;
+
         // Save Basic Information
         line.setAttribute( 'value', value );
         line.setAttribute( 'class', cname );
         line.setAttribute( 'y2', height - margin );
-        line.setAttribute( 'x1', width * timedelta + 0.001 );
-        line.setAttribute( 'x2', width * timedelta );
+        line.setAttribute( 'x1', xvalue + 0.001 );
+        line.setAttribute( 'x2', xvalue );
 
         // Prepare and Adjust for Scaled Rendering and Centering
         adjust( line, value );

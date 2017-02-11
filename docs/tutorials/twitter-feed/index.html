@@ -20,6 +20,7 @@
     }
     #twitter {
         background: #0a0a0f;
+        background: linear-gradient( #0a0a0f, #279 );
         width: 100%;
         height: 100px;
     }
@@ -66,7 +67,8 @@
     ,   svg         : 'twitter'
     ,   subkey      : 'sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe'
     ,   channel     : 'pubnub-twitter'
-    ,   streamspeed : 50
+    ,   snap        : 10
+    ,   streamspeed : 60
     ,   receiver    : m => tweet.innerHTML = m.text
     ,   transform   : m => ({
             classname : 'tweet'
