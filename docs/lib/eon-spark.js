@@ -14,8 +14,8 @@ const spark = setup => {
     ,   classname = setup.classname     || 'grapher'
     ,   duration  = setup.duration      || 60          // seconds
     ,   title     = setup.title         || ''          // string  TODO
-    ,   snap      = setup.snap          || 0           // pixels  TODO
-    ,   freqency  = setup.freqency      || 1000        // milliseconds TODO
+    ,   snap      = setup.snap          || 0           // pixels
+    ,   snapall   = setup.snapall       || 0           // pixels
     ,   subkey    = setup.subkey        || ''          // Subscribe Key
     ,   channel   = setup.channel       || ''          // Channel Name
     ,   transform = setup.transform     || (m=>m)      // Function Transform
@@ -152,7 +152,7 @@ const spark = setup => {
         ,   xlast    = lastline ? +lastline.getAttribute('x1') : 0;
 
         // Allow Snap
-        if (xvalue - xlast < snap) xvalue = xlast + snap;
+        if (xlast && (snapall || xvalue - xlast < snap)) xvalue = xlast + snap;
 
         // Save Basic Information
         line.setAttribute( 'value', value );
