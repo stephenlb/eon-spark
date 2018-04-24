@@ -395,7 +395,7 @@ const subscribe = setup => {
     let pubkey    = setup.pubkey    || 'demo'
     ,   subkey    = setup.subkey    || 'demo'
     ,   channel   = setup.channel   || 'a'
-    ,   timeout   = setup.timeout   || 5000
+    ,   timeout   = setup.timeout   || 290000
     ,   timetoken = setup.timetoken || '0'
     ,   message   = setup.message   || (()=>{})
     ,   windy     = setup.windowing || 1000
